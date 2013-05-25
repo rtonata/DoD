@@ -6,7 +6,7 @@ package my.newport.ac.uk;
 
 /**
  * Gets and Sets the items that are found at various locations in the world
- * @author Eyoka
+ * @author Richard Chambula
  */
 public class Item {
     
