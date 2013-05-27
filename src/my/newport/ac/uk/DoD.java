@@ -2,6 +2,7 @@ package my.newport.ac.uk;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 /**
@@ -29,7 +30,7 @@ public class DoD {
         GoodByeMessages goodByeMessage = new GoodByeMessages();
 
         String cmd = "";
-        String action;
+        String action = "";
         //Loop through for as long the player does not quit and the number of lives is more than 0
         while (!cmd.equalsIgnoreCase("quit") && (player.getLives() > 0)) {
             System.out.println("You are " + player.location.desc);
@@ -65,6 +66,11 @@ public class DoD {
                     //loop through all items one by one and ask if player wants to pick this item
 
                     for (int i = 0; i < player.location.getItems().size(); i++) {
+                        //do not allow player to pick up the dragon item
+                        //Therefore only make available all items apart from the dragon
+                        if (player.location.getItems().get(i).getItemName().equals("Dragon")) {
+                            continue;
+                        }
                         System.out.println("Take this? Y/N");
                         System.out.println(player.location.getItems().get(i).getItemName());
                         action = actionInput.readLine();
@@ -99,9 +105,16 @@ public class DoD {
                         if (action.equalsIgnoreCase("y")) {
                             //add item to this location
                             player.location.setItems(playerItems.get(i).getItemName());
-                            //remove item the players list
-                            playerItems.remove(i);
+                            
+                            //set the item to null, you cannot use remove here because
+                            //if you remove it will change the size of the array list 
+                            //which will disallow the player to drop some items without having to type drop again
+                            playerItems.set(i, null);
                         }
+                    }
+                    //check if some items are null and get rid of all null values in the array list
+                    if (playerItems.contains(null)){
+                         playerItems.removeAll(Collections.singleton(null));
                     }
                 } else { //inform user they have no items
                     System.out.println("You have nothing to drop");
@@ -149,29 +162,41 @@ public class DoD {
                 }
             }
             System.out.println();
+            //if player is trying to navigate to the north of the current location
             if (cmd.equalsIgnoreCase("n")) {
+                //Check if there is an exit towards that direction
                 if (player.location.north != null) {
+                    //if there if an exit, then set the current location to the new location
                     player.location = player.location.north;
                 } else {
                     System.out.println("There is no exit to the north.");
                 }
             }
+            //if player is trying to navigate to the east of the current location
             if (cmd.equalsIgnoreCase("e")) {
+                //Check if there is an exit towards that direction
                 if (player.location.east != null) {
+                    //if there if an exit, then set the current location to the new location
                     player.location = player.location.east;
                 } else {
                     System.out.println("There is no exit to the east.");
                 }
             }
+            //if player is trying to navigate to the south of the current location
             if (cmd.equalsIgnoreCase("s")) {
+                //Check if there is an exit towards that direction
                 if (player.location.south != null) {
+                    //if there if an exit, then set the current location to the new location
                     player.location = player.location.south;
                 } else {
                     System.out.println("There is no exit to the south.");
                 }
             }
+            //if player is trying to navigate to the west of the current location
             if (cmd.equalsIgnoreCase("w")) {
+                //Check if there is an exit towards that direction
                 if (player.location.west != null) {
+                    //if there if an exit, then set the current location to the new location
                     player.location = player.location.west;
                 } else {
                     System.out.println("There is no exit to the west.");
