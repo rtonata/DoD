@@ -103,7 +103,7 @@ public class DoD {
                         //if the player wants to drop, then add the selected item to 
                         //the current location, and remove the item from the player's location
                         if (action.equalsIgnoreCase("y")) {
-                            //add item to this location
+                            //add item to this locationk
                             player.location.setItems(playerItems.get(i).getItemName());
                             
                             //set the item to null, you cannot use remove here because
