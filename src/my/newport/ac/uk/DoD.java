@@ -29,8 +29,7 @@ public class DoD {
         GoodByeMessages goodByeMessage = new GoodByeMessages();
 
         String cmd = "";
-        String action = "";
-        boolean success = false;
+        String action;
         //Loop through for as long the player does not quit and the number of lives is more than 0
         while (!cmd.equalsIgnoreCase("quit") && (player.getLives() > 0)) {
             System.out.println("You are " + player.location.desc);
@@ -134,7 +133,6 @@ public class DoD {
                         //If the player has both the sword and the lamp, he can kill the dragon
                         if (sword && lamp) {
                             System.out.println("Hurray! You have killed the Dragon");
-                            success = true; //Player has won the game.
                             break;
                         } else {
                             System.out.println("Awww! You have been killed by the Dragon");
